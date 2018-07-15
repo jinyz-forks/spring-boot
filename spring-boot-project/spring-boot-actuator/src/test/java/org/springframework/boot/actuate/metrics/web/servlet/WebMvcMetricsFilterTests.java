@@ -250,8 +250,8 @@ public class WebMvcMetricsFilterTests {
 				result.set(this.mvc.perform(get("/api/c1/completableFuture/{id}", 1))
 						.andExpect(request().asyncStarted()).andReturn());
 			}
-			catch (Exception e) {
-				fail("Failed to execute async request", e);
+			catch (Exception ex) {
+				fail("Failed to execute async request", ex);
 			}
 		});
 		backgroundRequest.start();
@@ -497,7 +497,7 @@ public class WebMvcMetricsFilterTests {
 		@Override
 		protected void doFilterInternal(HttpServletRequest request,
 				HttpServletResponse response, FilterChain filterChain)
-						throws ServletException, IOException {
+				throws ServletException, IOException {
 			String misbehave = request.getHeader(TEST_MISBEHAVE_HEADER);
 			if (misbehave != null) {
 				response.setStatus(Integer.parseInt(misbehave));
